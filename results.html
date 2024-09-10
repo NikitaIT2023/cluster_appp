@@ -1,0 +1,52 @@
+> NikOne:
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Кластеризатор</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>SEO Кластеризатор</h1>
+    <form method="post">
+        <label for="keywords">Введите ключевые запросы (по одному на строку):</label><br>
+        <textarea name="keywords" id="keywords" rows="10" cols="50" required></textarea><br>
+        <label for="cluster_type">Выберите тип кластеризации:</label>
+        <select name="cluster_type" id="cluster_type">
+            <option value="soft">Soft (мягкая)</option>
+            <option value="hard">Hard (жесткая)</option>
+        </select><br>
+        <label for="region">Выберите регион:</label>
+        <select name="region" id="region">
+            <option value="Россия">Россия</option>
+            <option value="Москва">Москва</option>
+            <option value="Санкт-Петербург">Санкт-Петербург</option>
+        </select><br>
+        <input type="submit" value="Кластеризировать">
+    </form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты кластеризации</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Результаты кластеризации</h1>
+    <p>Регион: {{ region }}</p>
+    {% for cluster, keywords in clusters.items() %}
+        <h2>Кластер: {{ cluster }}</h2>
+        <ul>
+        {% for keyword in keywords %}
+            <li>{{ keyword }}</li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="/">Назад</a>
+</body>
+</html>
